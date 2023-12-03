@@ -24,7 +24,11 @@ if (file_exists($solutionDir . "/test-{$solution}.txt")) {
     $testInput = file($solutionDir . "/test-{$solution}.txt");
     $testResult = solution($testInput);
     $expectedResult = file_get_contents($solutionDir . "/test-result-{$solution}.txt");
-    assert(((string) $testResult) === $expectedResult, "Test failed, expected {$expectedResult}, got {$testResult}" . PHP_EOL);
+    if ((string) $testResult !== $expectedResult) {
+        echo "Test failed, expected {$expectedResult}, got {$testResult}" . PHP_EOL;
+        exit;
+    }
+
     echo 'Test ok' . PHP_EOL;
 }
 
