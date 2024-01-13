@@ -1,8 +1,9 @@
 .PHONY: day
 
-MEMORY_LIMIT = -d memory_limit=2G
+PHP_SETUP = -d memory_limit=2G
+DXDEBUG_SETUP = -dxdebug.start_with_request=yes -dxdebug.mode=debug -dxdebug.max_nesting_level=10000
 
-RUN_PHP = php ${MEMORY_LIMIT} -dxdebug.start_with_request=yes -dxdebug.mode=debug -dxdebug.max_nesting_level=10000
+RUN_PHP = php ${PHP_SETUP} ${DXDEBUG_SETUP}
 
 debug:
 	$(RUN_PHP) ./run.php ${DAY} ${SOLUTION}
@@ -11,4 +12,4 @@ day:
 	$(RUN_PHP) ./create_day.php ${DAY}
 
 run:
-	php ${MEMORY_LIMIT} ./run.php ${DAY} ${SOLUTION}
+	php ${PHP_SETUP} ./run.php ${DAY} ${SOLUTION}
